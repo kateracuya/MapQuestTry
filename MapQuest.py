@@ -40,4 +40,27 @@ def get_direction():
                 Label( win, text="Alternative Route: Money to be Spent on Fuel: " + str("{:.3f}".format(json_data_alt["route"]["fuelUsed"]*3.78 *int(gas)))).pack()
                 Label( win, text = "").pack()
 
-                
+                #display the route result with scrollbar
+                scrollbar.pack(side=RIGHT, fill = Y)
+                myList = Listbox(win,  yscrollcommand=scrollbar.set, width=100)
+
+                for each in json_data["route"]["legs"][0]["maneuvers"]:
+                        narrative = each["narrative"] + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)")
+                        myList.insert(END, narrative)
+
+                myList.pack(side=LEFT, fill=BOTH)
+                scrollbar.config(command=myList.yview)
+
+                #create button to close the application
+                Button(win, height=10, width=10, text="Close", command=destroy, bg="red", fg="white").pack()
+                lbl.destroy()
+
+        elif json_status == 402:
+                msg.set("You have entered an Invalid Location!")
+                lbl.pack(padx=5, pady=5)
+        elif json_status == 611:
+                msg.set("You have entered an Invalid Location!")
+                lbl.pack(padx=5, pady=5)
+        else:
+                msg.set("Something went wrong! PLEASE TRY AGAIN")
+                lbl.pack(padx=5, pady=5)
