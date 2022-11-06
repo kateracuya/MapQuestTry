@@ -5,7 +5,7 @@ from tkinter import *
 #Create an instance of tkinter window or frame
 win=Tk()
 win.resizable(False, False)
-win.title("Map Quest with Gas Calculator")
+win.title("Map Quest with Gas Calculator updated ver")
 startloc,destloc,gas = "","",""
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "MhvbvH6lJAKgMu9wisKM5iSoZWOFFPQJ"
